@@ -9,3 +9,11 @@ commands needed to build this file:
     for executing executables:
         debug mode: $ ./final_debug
         optimization mode: $ ./final_optimized
+
+    Input :
+    amount invested
+    year of investment
+
+    Output :
+    actual money recieved
+    money value
