@@ -51,7 +51,25 @@ double calculateMoneyValue(double amount, int year, double inflation_rates[], do
     return money_value;
 }
 
+double calculateGrowth(int start, int end, double inflation_rates[], double interest_rates[])
+{
+    int prev_year = 1960;
+    int index_year = start - prev_year;
+    double money_value[end - prev_year + 1];
 
+    for (int i = index_year; i <= (end - prev_year); i++)
+    {
+        money_value[i] = interest_rates[i] - inflation_rates[i];
+    }
+    double sum = 0;
+    for (int i = index_year + 1; i <= (end - prev_year); i++)
+    {
+        sum += money_value[i] - money_value[i - 1];
+    }
+
+    double avg = sum / (end - prev_year);
+    return avg;
+}
 
 int main()
 {
@@ -135,7 +153,13 @@ int main()
     cout << "actual money received in 2022: " << actual_value << endl;
     cout << "value of money in 2022: " << money_value << endl;
 
-    
+    double growtDictatorship = calculateGrowth(1960, 1977, inflationRate, intrestRate);
+    double growthMonarchy = calculateGrowth(1978, 2022, inflationRate, intrestRate);
+
+    if (growthMonarchy > growtDictatorship)
+        cout << "Growth in monarchy is more than growth in dictatorship";
+    else
+        cout << "Growth in dictatorship is more than growth in monarchy";
 
     return 0;
 }
