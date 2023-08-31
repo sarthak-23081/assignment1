@@ -13,6 +13,11 @@ double calculateActualValue(double amount, int year, double interest_rates[])
     int prev_year = 1960;
     int index_year = year - prev_year;
 
+    if (year < 2002)
+    {
+        amount /= 166;
+    }
+
     double actual_value = amount;
     double net_rate;
     for (int i = index_year; i <= (current_year - prev_year); i++)
@@ -30,6 +35,11 @@ double calculateMoneyValue(double amount, int year, double inflation_rates[], do
     int prev_year = 1960;
     int index_year = year - prev_year;
 
+    if (year < 2002)
+    {
+        amount = amount / 166;
+    }
+
     double money_value = amount;
     double net_rate;
 
@@ -41,11 +51,13 @@ double calculateMoneyValue(double amount, int year, double inflation_rates[], do
     return money_value;
 }
 
+
+
 int main()
 {
     const int MAX_VALUES = 63;
 
-    ifstream inputFile("india_data.csv");
+    ifstream inputFile("spain_data.csv");
 
     if (!inputFile.is_open())
     {
@@ -102,7 +114,7 @@ int main()
 
     inputFile.close();
 
-    cout << "amount invested(₹): ";
+    cout << "amount invested: ";
     if (!(cin >> amount))
     {
         cerr << "Error: Invalid input for amount." << endl;
@@ -122,6 +134,8 @@ int main()
     cout << fixed << setprecision(2);
     cout << "actual money received in 2022: " << actual_value << endl;
     cout << "value of money in 2022: " << money_value << endl;
+
+    
 
     return 0;
 }
